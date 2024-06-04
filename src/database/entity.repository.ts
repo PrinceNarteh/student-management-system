@@ -10,22 +10,22 @@ import {
 export abstract class EntityRepository<T extends Document> {
   constructor(protected readonly entityModel: Model<T>) {}
 
-  async findAll(): Promise<T[]> {
-    return this.entityModel.find();
+  async findAll(filter?: FilterQuery<T>): Promise<T[]> {
+    return this.entityModel.find(filter);
   }
 
   async findOne(
     filter: FilterQuery<T>,
-    projection: ProjectionType<T>,
-    options: QueryOptions<T>,
+    projection?: ProjectionType<T>,
+    options?: QueryOptions<T>,
   ): Promise<T | null> {
     return this.entityModel.findOne(filter, projection, options);
   }
 
   async findById(
     id: string,
-    projection: ProjectionType<T>,
-    options: QueryOptions<T>,
+    projection?: ProjectionType<T>,
+    options?: QueryOptions<T>,
   ): Promise<T | null> {
     return this.entityModel.findById(id, projection, options);
   }

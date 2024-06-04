@@ -1,16 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
-import { FilterQuery, Model, ProjectionType, QueryOptions } from 'mongoose';
+import { FilterQuery, ProjectionType, QueryOptions } from 'mongoose';
+import { UsersRepo } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>,
-  ) {}
+  constructor(private readonly userRepo: UsersRepo) {}
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find();
+    return this.userRepo.findAll();
   }
 
   async findOne(
@@ -18,7 +16,7 @@ export class UsersService {
     projection: ProjectionType<User>,
     options: QueryOptions<User>,
   ): Promise<User> {
-    const user = await this.userModel.findOne(filter, projection, options);
+    const user = await this.userRepo.findOne(filter, projection, options);
     if (!user) {
       throw new NotFoundException('user not found');
     }

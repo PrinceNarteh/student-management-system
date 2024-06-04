@@ -1,0 +1,3 @@
+export default {
+  MONGODB_VIOLATION_ERROR_CODE: 11000,
+};

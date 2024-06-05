@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  HttpException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -9,10 +10,11 @@ import { FilterQuery, ProjectionType, QueryOptions } from 'mongoose';
 import { UsersRepo } from './users.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import constants from 'src/common/constants';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepo: UsersRepo) { }
+  constructor(private readonly userRepo: UsersRepo) {}
 
   async findAll(): Promise<UserDocument[]> {
     return this.userRepo.findAll();
@@ -52,5 +54,31 @@ export class UsersService {
       }
       throw new InternalServerErrorException();
     }
+  }
+
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserDocument> {
+    try {
+      const user = await this.userRepo.findOneAndUpdate(
+        { _id: id },
+        updateUserDto,
+      );
+      if (!user) {
+        throw new NotFoundException('user not found');
+      }
+      return user;
+    } catch (error) {
+      if (error.code === constants.MONGODB_VIOLATION_ERROR_CODE) {
+        throw new ConflictException('Email already in used');
+      }
+      throw new HttpException(error.response.message, error.statusCode);
+    }
+  }
+
+  async delete(filter: FilterQuery<UserDocument>) {
+    const res = await this.userRepo.delete(filter);
+    return { message: res ? 'user deleted successfully' : 'user not found' };
   }
 }

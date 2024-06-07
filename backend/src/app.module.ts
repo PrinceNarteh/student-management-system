@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { StaffsModule } from './modules/staffs/staffs.module';
 import { AnnouncementsModule } from './modules/announcements/announcements.module';
 import { GradesModule } from './modules/grades/grades.module';
+import { StudentsModule } from './modules/students/students.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GradesModule } from './modules/grades/grades.module';
     StaffsModule,
     AnnouncementsModule,
     GradesModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

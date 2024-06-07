@@ -13,7 +13,7 @@ import { IdDto } from 'src/common/dto/id.dto';
 import { CreateAnnouncementDto } from './dtos/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dtos/update-announcement.dto';
 
-@Controller()
+@Controller('announcements')
 export class AnnouncementController {
   constructor(private readonly announcementService: AnnouncementsService) {}
 

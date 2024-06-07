@@ -13,7 +13,7 @@ import { IdDto } from 'src/common/dto/id.dto';
 import { CreateStudentDto } from './dtos/create-student.dto';
 import { UpdateStudentDto } from './dtos/update-student.dto';
 
-@Controller('controller')
+@Controller('students')
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 

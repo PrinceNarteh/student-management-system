@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { StaffsModule } from './modules/staffs/staffs.module';
 import { AnnouncementsModule } from './modules/announcements/announcements.module';
+import { GradesModule } from './modules/grades/grades.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AnnouncementsModule } from './modules/announcements/announcements.modul
     AuthModule,
     StaffsModule,
     AnnouncementsModule,
+    GradesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

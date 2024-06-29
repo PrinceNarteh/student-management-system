@@ -5,7 +5,7 @@ export const Sidebar = () => {
         <div className="relative h-full overflow-x-hidden overflow-y-auto bg-[#0b2948]">
           <div className="flex flex-col h-full">
             <div className="h-16 min-h-16 flex items-center py-5 mb-6 mt-4">
-              <div className="flex items-center w-full overflow-hidden">
+              <div className="px-5 flex items-center w-full overflow-hidden">
                 <div className="size-[35px] flex items-center justify-center text-white font-bold text-[24px] ml-1 mr-[10px] bg-gradient-to-t from-[#1557cd] to-[#5ae1ff]">
                   P
                 </div>
